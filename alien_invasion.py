@@ -20,17 +20,16 @@ class AlienInvasion:
         self.clock = pygame.time.Clock()
         self.settings = Settings()
 
-        # Creates a 1200 x 800 game window
-        self.screen = pygame.display.set_mode(
-                (self.settings.screen_width, self.settings.screen_height)) # Surface
+        # Tells pygame to figure out a window size that will fill the screen (Fullscreen)
+        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        self.settings.screen_width = self.screen.get_rect().width
+        self.settings.screen_height = self.screen.get_rect().height 
         pygame.display.set_caption("Alien Invasion")
 
         # Set the background color.
         self.bg_color = (230, 230, 230)
 
         self.ship = Ship(self)
-
-
 
     def run_game(self):
         """Start the main loop for the game."""
@@ -49,7 +48,6 @@ class AlienInvasion:
                 self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
-
 
     def _check_keydown_events(self, event):
         """Respond to keypresses."""
